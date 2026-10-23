@@ -1,0 +1,594 @@
+import java.io.*;
+import java.util.*;
+public class preques1 {
+    public static void main(String[] args)throws IOException{
+        FileReader fl = new FileReader("./inp2.txt");
+        BufferedReader br = new BufferedReader(fl);
+        FileWriter fw = new FileWriter("./24201428.out");
+        PrintWriter pw = new PrintWriter(fw);  
+        int N = Integer.parseInt(br.readLine());
+       int[] num = new int[N];
+int index = 0;
+
+while (index < N) {
+    String st = br.readLine();
+    StringTokenizer sr = new StringTokenizer(st);
+
+    while (sr.hasMoreTokens() && index < N) {
+        num[index] = Integer.parseInt(sr.nextToken());
+        index++;
+    }
+}
+        int count = 0;
+        for(int i = 0;i<num.length-1;i++){
+            int min = i;
+            for(int j = i+1; j < num.length;j++){
+             if(num[min]>num[j]){
+                min = j;
+             }
+            }
+            if(min!=i){
+                int temp = num[i];
+                num[i]= num[min];
+                num[min] = temp; 
+                count++;
+            }
+        }
+        pw.println(count);
+         pw.flush();
+         pw.close();
+         br.close();
+    }
+}
+    import java.io.*;
+    import java.util.*;
+public class preques2 {
+    public static void main(String[] args)throws IOException{
+        FileReader fl = new FileReader("./input2.txt");
+        BufferedReader br = new BufferedReader(fl);
+        FileWriter fw = new FileWriter("./24201428.txt");
+        PrintWriter pw = new PrintWriter(fw);  
+        String kisuekta = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(kisuekta);
+        int N = Integer.parseInt(sr1.nextToken());
+        int X = Integer.parseInt(sr1.nextToken());
+       int[] num = new int[N];
+    int index = 0;
+    while (index < N) {
+    String st = br.readLine();
+    StringTokenizer sr2 = new StringTokenizer(st);
+
+    while (sr2.hasMoreTokens() && index < N) {
+        num[index] = Integer.parseInt(sr2.nextToken());
+        index++;
+    }
+}
+        int count = 0;
+        for(int i = 0;i<num.length-1;i++){
+            int max = i;
+            for(int j = i+1; j < num.length;j++){
+             if(num[max]<num[j]){
+                max = j;
+             }
+            }
+            if(max!=i){
+                int temp = num[i];
+                num[i]= num[max];
+                num[max] = temp; 
+                count++;
+            }
+        }
+       if(count<=X){
+        pw.println("Possible");
+       }
+       else {
+        pw.println("Impossible");
+       }
+         pw.flush();
+         pw.close();
+         br.close();
+    }
+}
+
+import java.io.*;
+import java.util.*;
+
+public class preques3 {
+  public static void main (String [] args) throws IOException{
+    FileReader fl = new FileReader("./inp2.txt");
+    BufferedReader br = new BufferedReader(fl);
+    FileWriter fw = new FileWriter("./24201428.out");
+    PrintWriter pw = new PrintWriter(fw);
+    int len = Integer.parseInt(br.readLine());
+    int arr [] = new int[len];
+    int brr [] = new int[len];
+    String line = br.readLine();
+    StringTokenizer st = new StringTokenizer(line); 
+    for(int i = 0; i<len;i++){
+        arr[i] = Integer.parseInt(st.nextToken());
+    }
+    
+    int left = 0;
+    int right = len-1;
+    int index = 0;
+      while(left<=right){
+        if(arr[left]<=arr[right]){
+            brr[index] = arr[left];
+            left++;
+        }
+        else {
+            brr[index] = arr[right];
+            right--;
+        }
+        index++;
+      }
+         boolean isSorted = true;
+
+        for (int i = 0; i < len - 1; i++) {
+            if (brr[i] > brr[i + 1]) {
+                isSorted = false;
+                break;
+            }
+        }
+
+        if (isSorted) {
+            pw.println("Possible");
+        }
+        else {
+            pw.println("Impossible");
+        }
+
+        pw.close();
+        br.close();
+  }
+}
+
+import java.io.*;
+import java.util.*;
+
+public class preques4 {
+  public static void main (String [] args) throws IOException{
+    FileReader fl = new FileReader("./input2.txt");
+    BufferedReader br = new BufferedReader(fl);
+    FileWriter fw = new FileWriter("./24201428.txt");
+    PrintWriter pw = new PrintWriter(fw);
+    int len = Integer.parseInt(br.readLine());
+    int arr [] = new int[len];
+    StringTokenizer st = new StringTokenizer(br.readLine()); 
+    int index =0 ;
+    
+    while(st.hasMoreTokens() && index<len){
+        arr[index] = Integer.parseInt(st.nextToken());
+        index++;
+    }
+
+   
+    for (int i = 0; i < len; i++) {
+    int min = i;
+
+    for (int j = i + 2; j < len; j += 2) {
+        if (arr[min] > arr[j]) {
+            min = j;
+        }
+    }
+
+    if (min != i) {
+        int temp = arr[i];
+        arr[i] = arr[min];
+        arr[min] = temp;
+    }
+}
+
+    boolean isSorted = true;
+
+        for (int i = 0; i < len - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                isSorted = false;
+                break;
+            }
+        }
+        System.out.println("SORTING FINISHED");
+        
+        if (isSorted) {
+            pw.println("Possible");
+        }
+        else {
+            pw.println("Impossible");
+        }
+        pw.flush();
+        pw.close();
+        br.close();
+
+  }
+}
+
+
+import java.io.*;
+public class ProblemA {
+    public static void main (String [] args ) throws IOException{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+    int inputs = Integer.parseInt(br.readLine());
+    for(int i = 0;i<inputs;i++){
+      int num =  Integer.parseInt(br.readLine());
+      if(num%2==0){
+        pw.println(num + " is an Even number.");
+      }
+      else {
+        pw.println(num + " is an Odd number.");
+        }
+      }
+    pw.flush();
+    }
+  }
+
+
+
+import java.io.*;
+import java.util.*;
+public class ProblemB {
+    public static void main (String [] args) throws IOException{
+  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+  int num = Integer.parseInt(br.readLine());
+   PrintWriter pw = new PrintWriter(System.out);
+  for(int i = 0;i<num;i++){
+  StringTokenizer st = new StringTokenizer(br.readLine());
+    st.nextToken();
+    long first  = Long.parseLong(st.nextToken());
+    String sign = st.nextToken();
+    long second  = Long.parseLong(st.nextToken());
+    if(sign.equals("+")){
+        pw.println(first + second);
+    } 
+    else if(sign.equals("-")){
+        pw.println((double)first - second);
+    } 
+    else if(sign.equals("*")){
+        pw.println((double)first * second);
+    } 
+     else if(sign.equals("%")){
+        pw.println((double)first % second);
+    } 
+     else if(sign.equals("&")){
+        pw.println(first & second);
+    } 
+     else if(sign.equals("^")){
+        pw.println(first ^ second);
+    } 
+    else if(sign.equals("|")){
+        pw.println(first | second);
+    }
+    else if(sign.equals("<<")){
+        pw.println(first << second);
+    } else if(sign.equals(">>")){
+        pw.println(first >> second);
+    }  
+    else {
+        if(second!=0){
+        pw.println((double)first /(double) second );
+        } 
+        else {
+          pw.println("Error");
+        }
+      }
+      }
+      pw.flush();
+    }
+  }
+
+
+
+
+  
+  import java.io.*;
+public class ProblemC {
+     public static void main (String [] args ) throws IOException{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+      int cases = Integer.parseInt(br.readLine());
+      while(cases>0){
+      long Num = Long.parseLong(br.readLine());  
+      long sum = Num*(Num+1)/2;
+        pw.println(sum);
+            cases--;
+        }    
+      pw.close();
+    }
+}
+
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+public class ProblemD {
+    public static void main(String [] args) throws IOException {
+     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     PrintWriter pw = new PrintWriter(System.out);
+     StringTokenizer st;
+     int cases  = Integer.parseInt( br.readLine());
+       for(int i = 0; i<cases;i++){
+           int len = Integer.parseInt( br.readLine());
+           int [] arr = new int[len];
+           String elem = br.readLine(); 
+           int j = 0 ;
+           st = new StringTokenizer(elem);
+              while(st.hasMoreTokens() && j<arr.length){
+                  int num = Integer.parseInt(st.nextToken());
+                  arr[j] = num;    
+                  j++;    
+                 }
+              if(arr.length>1){
+                 for(int k = 0; k<arr.length-1;k++){
+                 if(arr[k]>arr[k+1]){
+                   pw.println("NO");
+                   break;
+                 }    
+                 else if(k==arr.length-2 && arr[k]<=arr[k+1]){
+                   pw.println("YES");
+                 }
+               }  
+            }
+            else {
+                pw.println("YES");
+            }
+        }
+        pw.flush();
+    }
+}
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+public class problemE {
+  public static void main(String [] args)throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+    int len = Integer.parseInt(br.readLine());
+    int [] arr = new int [len];
+    StringTokenizer st;
+    String str = br.readLine();
+    st = new StringTokenizer(str);
+    for (int i = 0; i < len; i++) {
+    arr[i] = Integer.parseInt(st.nextToken());
+    }
+     int[] operations = new int[len * len];
+     int count = 0;
+        for (int a = 0; a < len; a++) {
+            for (int i = 0; i < len - 2 ; i++) {
+                if (arr[i] > arr[i + 2]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 2];
+                    arr[i + 2] = temp;
+                    operations[count] = i+1;
+                    count++;
+                }
+            }
+        }
+
+      boolean flag = true;
+     for(int i = 0;i<arr.length-1;i++){
+        if(arr[i]>arr[i+1]){
+            flag = false;
+            break;
+        }
+     }   
+     if(!flag){
+        pw.println("NO");
+     }       
+     else{
+        pw.println("YES");
+        pw.println(count);
+        for(int i =0 ;i<count;i++){
+            int start = operations[i];
+            pw.println(start+" "+(start +2));
+        }
+     }
+     pw.flush();
+    }
+}
+
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+
+public class ProblemF {
+     public static void main(String [] args) throws IOException {
+     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     PrintWriter pw = new PrintWriter(System.out);
+     StringTokenizer st;
+           int N = Integer.parseInt( br.readLine());
+           int [] arr = new int[N];
+           String elem = br.readLine(); 
+           int j = 0 ;
+           st = new StringTokenizer(elem);
+              while(st.hasMoreTokens() && j<arr.length){
+                  int num = Integer.parseInt(st.nextToken());
+                  arr[j] = num;    
+                  j++;    
+                 }
+           for(int k = 0;k<arr.length;k++){ 
+              for(int i =0;i<arr.length-1;i++){
+               if((arr[i]%2==0 && arr[i+1]%2==1) ||(arr[i]%2==1 && arr[i+1]%2==0)){
+                continue;
+               }
+               else if(arr[i]>arr[i+1]){
+                int temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+               }
+              }   
+        } 
+            for(int l = 0;l < arr.length;l++){
+                pw.print(arr[l] + " ");
+            }
+              pw.flush();
+    }
+}
+
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+
+public class ProblemG {
+        public static void main(String [] args) throws IOException {
+     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     PrintWriter pw = new PrintWriter(System.out);
+     StringTokenizer st1;
+     StringTokenizer st2;
+     int cases  = Integer.parseInt( br.readLine());
+       for(int i = 0; i<cases;i++){
+           int len = Integer.parseInt( br.readLine());
+           int [] ID = new int[len];
+           int [] marks = new int[len];
+           String elem1 = br.readLine(); 
+            String elem2 = br.readLine(); 
+           int j = 0 ; 
+           st1 = new StringTokenizer(elem1);
+              while(st1.hasMoreTokens() && j<ID.length){
+                  int num = Integer.parseInt(st1.nextToken());
+                  ID[j] = num;    
+                  j++;    
+                 }
+            st2 = new StringTokenizer(elem2); 
+            int k = 0;    
+               while(st2.hasMoreTokens() && k<marks.length){
+                  int num = Integer.parseInt(st2.nextToken());
+                  marks[k] = num;    
+                  k++;    
+               }
+            int count = 0;
+            for (int l = 0; l < len - 1; l++) {
+              int best = l; 
+              for (int a = l + 1; a < len; a++) {
+                 if (marks[a] > marks[best]) {
+                  best = a;
+                 }   
+                 else if (marks[a] == marks[best]) {
+                     if (ID[a] < ID[best]) {
+                    best = a;
+                    }
+                }   
+            }
+            if(best!=l){
+            int temp1 = marks[l];
+            marks[l] = marks[best];
+            marks[best] = temp1;  
+            int temp2 = ID[l];
+            ID[l] = ID[best];
+            ID[best] = temp2;
+             count++;
+              }
+          }
+        pw.println("Minimum swaps: "+count);
+        for(int b = 0; b < len; b ++){
+           pw.println("ID: " + ID[b] + " Mark: " + marks[b]);
+           }
+        }
+        pw.flush();
+    }   
+}
+
+
+
+import java.io.*;
+import java.util.*;
+public class ProblemH {
+public static void main(String [] args)throws IOException{
+   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+   PrintWriter pw = new PrintWriter(System.out);
+   int len = Integer.parseInt(br.readLine());
+   String [] arr = new String[len];
+    for(int i = 0;i<arr.length;i++){
+        arr[i] = br.readLine();
+    }  
+     Arrays.sort(arr, new Comparator<String>() {
+            public int compare(String a, String b) {
+                String [] str1 = a.split(" ");
+                String [] str2 = b.split(" ");
+                int x = str1[0].compareTo(str2[0]);
+                    if (x != 0) {
+                        return x;
+                    }
+                return str2[str2.length - 1].compareTo( //time
+                        str1[str1.length - 1]);
+                 }
+        } 
+    );
+        for (int i = 0; i < len; i++) {
+            pw.println(arr[i]);
+        }
+        pw.flush();
+    }
+}
+
+
+
+
+
+
+
+import java.io.*;
+
+public class ProblemHprev {
+public static void main(String [] args)throws IOException{
+   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+   PrintWriter pw = new PrintWriter(System.out);
+   int len = Integer.parseInt(br.readLine());
+   String [] arr = new String[len];
+    for(int i = 0;i<arr.length;i++){
+        arr[i] = br.readLine();
+    }
+            String[] trains = new String[len];
+        String[] times = new String[len];
+        for (int i = 0; i < len; i++) {
+            String[] part = arr[i].split(" ");
+            trains[i] = part[0];
+            times[i] = part[6];
+        }
+       for(int i = 0;i<arr.length-1;i++){
+        int min = i;
+        for(int j = i+1; j<arr.length;j++){
+          int x = trains[min].compareTo(trains[j]);
+          if(x>0){
+            min = j;
+          }
+          else if(x==0){
+           int y = times[min].compareTo(times[j]);
+           if(y<0){
+            min = j;
+           }
+          }
+        }
+        if(min!=i){
+            String temp1 = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp1;
+             String temp2 = trains[i];
+            trains[i] = trains[min];
+            trains[min] = temp2;
+             String temp3 = times[i];
+            times[i] = times[min];
+            times[min] = temp3;
+        }
+       } 
+        for (int i = 0; i < arr.length; i++) {
+            pw.println(arr[i]);
+        }
+       pw.flush();
+    }
+} 
+
