@@ -202,6 +202,710 @@ public class preques4 {
   }
 }
 
+import java.io.*;
+import java.util.*;
+
+public class preques5 {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(
+            new FileReader("./inp2.txt")
+        );
+
+        // Read all integers from the input file
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+            for (int i = 0; i < N; i++) {
+                 arr[i] = Integer.parseInt(st.nextToken());
+            }
+            br.close();
+        // Calculate ranks
+        int[] ranks = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            int rank = 1;
+
+            for (int j = 0; j < i; j++) {
+                if (arr[j] >= arr[i]) {
+                    rank++;
+                }
+            }
+
+            ranks[i] = rank;
+        }
+
+        // Write output only after calculations finish
+        PrintWriter pw = new PrintWriter(
+            new FileWriter("./24201428.out")
+        );
+
+        for (int i = 0; i < N; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(ranks[i]);
+        }
+
+        pw.println();
+        pw.close();
+    }
+}
+
+import java.io.*;
+import java.util.*;
+
+public class preques6 {
+    public static void main(String[] args) throws IOException {
+
+        FileReader fl = new FileReader("./input2.txt");
+        BufferedReader br = new BufferedReader(fl);
+
+        String kisuekta = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(kisuekta);
+
+        int N = Integer.parseInt(sr1.nextToken());
+        int X = Integer.parseInt(sr1.nextToken());
+
+        int[] num = new int[N];
+        int index = 0;
+
+        String st;
+
+            st = br.readLine();
+
+            StringTokenizer sr2 = new StringTokenizer(st);
+
+            while (sr2.hasMoreTokens() && index < N) {
+                num[index] = Integer.parseInt(sr2.nextToken());
+                index++;
+        }
+
+        br.close();
+
+        boolean possible = true; //handled already most of the cases
+
+        if (X == 1) {
+            for (int i = 0; i < N - 1; i++) {
+                if (num[i] > num[i + 1]) {
+                    possible = false;
+                    break;
+                }
+            }
+        }
+
+        FileWriter fw = new FileWriter("./24201428.txt");
+        PrintWriter pw = new PrintWriter(fw);
+
+        if (possible) {
+            pw.println("Possible");
+        } else {
+            pw.println("Impossible");
+        }
+
+        pw.close();
+    }
+}
+
+import java.io.*;
+import java.util.*;
+
+public class preques7 {
+    public static void main(String[] args) throws IOException {
+
+        FileReader fl = new FileReader("./input2.txt");
+        BufferedReader br = new BufferedReader(fl);
+
+        String kisuekta = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(kisuekta);
+
+        int N = Integer.parseInt(sr1.nextToken());
+        int M = Integer.parseInt(sr1.nextToken());
+
+        int[] num = new int[N];
+        int index = 0;
+
+        String st;
+
+            st = br.readLine();
+
+            StringTokenizer sr2 = new StringTokenizer(st);
+
+            while (sr2.hasMoreTokens() && index < N) {
+                num[index] = Integer.parseInt(sr2.nextToken());
+                index++;
+        }
+
+        br.close(); 
+       
+        // Step 1: Selection Sort in descending order
+        for (int i = 0; i < N - 1; i++) {
+            int max = i;
+
+            for (int j = i + 1; j < N; j++) {
+                if (num[j] > num[max]) {
+                    max = j;
+                }
+            }
+
+            if (max != i) {
+                int temp = num[i];
+                num[i] = num[max];
+                num[max] = temp;
+            }
+        }
+
+        // Step 2: Find missing numbers
+        FileWriter fw = new FileWriter("./24201428.out");
+        PrintWriter pw = new PrintWriter(fw);
+
+        index = 0;
+        boolean first = true;
+
+        for (int i = M - 1; i >= 0; i--) {
+
+            if (index < N && num[index] == i) {
+                index++;
+            } else {
+                if (!first) {
+                    pw.print(" ");
+                }
+
+                pw.print(i);
+                first = false;
+            }
+        }
+
+        pw.println();
+        pw.close();
+    }
+}
+
+
+import java.io.*;
+import java.util.*;
+
+public class preques8 {
+    public static void main(String[] args) throws IOException {
+
+        FileReader fl = new FileReader("./inp2.txt");
+        BufferedReader br = new BufferedReader(fl);
+
+        String line = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(line);
+
+        int N = Integer.parseInt(sr1.nextToken());
+        int M = Integer.parseInt(sr1.nextToken());
+
+        int[] greater = new int[N];
+        int[] remaining = new int[N];
+
+        int countG = 0;
+        int countR = 0;
+        int index = 0;
+
+        // Read all N integers
+      
+            line = br.readLine();
+
+            StringTokenizer sr2 = new StringTokenizer(line);
+
+            while (sr2.hasMoreTokens() && index < N) {
+                int value = Integer.parseInt(sr2.nextToken());
+
+                if (value > M) {
+                    greater[countG] = value;
+                    countG++;
+                } else {
+                    remaining[countR] = value;
+                    countR++;
+                }
+
+                index++;
+            
+        }
+
+        br.close();
+
+        // Selection Sort: greater numbers in descending order
+        for (int i = 0; i < countG - 1; i++) {
+            int max = i;
+
+            for (int j = i + 1; j < countG; j++) {
+                if (greater[j] > greater[max]) {
+                    max = j;
+                }
+            }
+
+            if (max != i) {
+                int temp = greater[i];
+                greater[i] = greater[max];
+                greater[max] = temp;
+            }
+        }
+
+        // Write output after calculations
+        FileWriter fw = new FileWriter("./24201428.out");
+        PrintWriter pw = new PrintWriter(fw);
+
+        boolean first = true;
+
+        // Print sorted numbers greater than M
+        for (int i = 0; i < countG; i++) {
+            if (!first) {
+                pw.print(" ");
+            }
+            pw.print(greater[i]);
+            first = false;
+        }
+
+        // Print remaining numbers in their original order
+        for (int i = 0; i < countR; i++) {
+            if (!first) {
+                pw.print(" ");
+            }
+            pw.print(remaining[i]);
+            first = false;
+        }
+
+        pw.println();
+        pw.close();
+    }
+}
+
+
+
+import java.io.*;
+import java.util.*;
+
+public class preques9 {
+    public static void main(String[] args) throws IOException {
+
+        FileReader fl = new FileReader("./inp2.txt");
+        BufferedReader br = new BufferedReader(fl);
+
+        String line = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(line);
+
+        int N = Integer.parseInt(sr1.nextToken());
+        int M = Integer.parseInt(sr1.nextToken());
+
+        int[] num = new int[N];
+        int index = 0;
+
+        while (index < N) {
+            line = br.readLine();
+
+            if (line == null) {
+                throw new IOException("Not enough input numbers");
+            }
+
+            StringTokenizer sr2 = new StringTokenizer(line);
+
+            while (sr2.hasMoreTokens() && index < N) {
+                num[index] = Integer.parseInt(sr2.nextToken());
+                index++;
+            }
+        }
+
+        br.close();
+
+        // Selection Sort in ascending order
+        for (int i = 0; i < N - 1; i++) {
+            int min = i;
+
+            for (int j = i + 1; j < N; j++) {
+                if (num[j] < num[min]) {
+                    min = j;
+                }
+            }
+
+            if (min != i) {
+                int temp = num[i];
+                num[i] = num[min];
+                num[min] = temp;
+            }
+        }
+
+        // Calculate minimum and maximum remaining sums
+        int keep = N - M;
+        long minSum = 0;
+        long maxSum = 0;
+
+        for (int i = 0; i < keep; i++) {
+            minSum += num[i];
+        }
+
+        for (int i = M; i < N; i++) {
+            maxSum += num[i];
+        }
+
+        long answer = maxSum - minSum;
+
+        // Write output
+        FileWriter fw = new FileWriter("./24201428.out");
+        PrintWriter pw = new PrintWriter(fw);
+
+        pw.println(answer);
+
+        pw.close();
+    }
+}
+
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class preques10 {
+    public static void main(String[] args) throws IOException {
+
+        // Read input file
+        BufferedReader br = new BufferedReader(
+            new FileReader("inp2.txt")
+        );
+
+        int n = Integer.parseInt(br.readLine().trim());
+        int[] arr = new int[n];
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        br.close();
+
+        // Core logic: Arrange in wiggle order
+        for (int i = 0; i < n - 1; i++) {
+
+            if (i % 2 == 0 && arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+
+            if (i % 2 != 0 && arr[i] < arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+
+        // Write output file
+        PrintWriter pw = new PrintWriter(
+            new FileWriter("00000000.out")
+        );
+
+        for (int i = 0; i < n; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(arr[i]);
+        }
+
+        pw.println();
+        pw.close();
+    }
+}
+
+
+import java.io.*;
+import java.util.*;
+
+public class preques11 {
+    public static void main(String[] args) throws IOException {
+
+        FileReader fl = new FileReader("./inp2.txt");
+        BufferedReader br = new BufferedReader(fl);
+
+        String line = br.readLine();
+        StringTokenizer sr1 = new StringTokenizer(line);
+
+        int N = Integer.parseInt(sr1.nextToken());
+        int M = Integer.parseInt(sr1.nextToken());
+
+        // Read the target sequence
+        int[] target = new int[M];
+        StringTokenizer sr2 = new StringTokenizer(br.readLine());
+
+        for (int i = 0; i < M; i++) {
+            target[i] = Integer.parseInt(sr2.nextToken());
+        }
+
+        // Read the original array
+        int[] num = new int[N];
+        StringTokenizer sr3 = new StringTokenizer(br.readLine());
+
+        for (int i = 0; i < N; i++) {
+            num[i] = Integer.parseInt(sr3.nextToken());
+        }
+
+        br.close();
+
+        // Store the indices of each swap
+        int[] first = new int[M + 1];
+        int[] second = new int[M + 1];
+        int count = 0;
+
+        // Put each target number in its correct position
+        for (int i = 0; i < M; i++) {
+
+            int pos = i;
+
+            for (int j = i; j < N; j++) {
+                if (num[j] == target[i]) {
+                    pos = j;
+                    break;
+                }
+            }
+
+            if (pos != i) {
+                int temp = num[i];
+                num[i] = num[pos];
+                num[pos] = temp;
+
+                first[count] = pos;
+                second[count] = i;
+                count++;
+            }
+        }
+        
+
+        // The question requires one or more swaps.
+        // If no swap was needed, perform a harmless swap
+        // that keeps the target sequence as a subsequence.
+        if (count == 0) {
+            int temp = num[M - 1];
+            num[M - 1] = num[M];
+            num[M] = temp;
+
+            first[count] = M - 1;
+            second[count] = M;
+            count++;
+        }
+
+        // Write output
+        FileWriter fw = new FileWriter("./24201428.out");
+        PrintWriter pw = new PrintWriter(fw);
+
+        pw.println(count);
+
+        for (int i = 0; i < count; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(first[i]);
+        }
+        pw.println();
+
+        for (int i = 0; i < count; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(second[i]);
+        }
+        pw.println();
+
+        pw.close();
+    }
+}
+
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class preques12 {
+
+    static int swapCount = 0;
+    static int[] first;
+    static int[] second;
+
+    // Swap two elements and record their indices
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+
+        first[swapCount] = i;
+        second[swapCount] = j;
+        swapCount++;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        // Read input file
+        BufferedReader br = new BufferedReader(
+            new FileReader("inp2.txt")
+        );
+
+        int n = Integer.parseInt(br.readLine().trim());
+        int[] arr = new int[n];
+        int[] sorted = new int[n];
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            sorted[i] = arr[i];
+        }
+
+        br.close();
+
+        first = new int[3 * n];
+        second = new int[3 * n];
+
+        // Sort a copy using Bubble Sort
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (sorted[j] > sorted[j + 1]) {
+                    int temp = sorted[j];
+                    sorted[j] = sorted[j + 1];
+                    sorted[j + 1] = temp;
+                }
+            }
+        }
+
+        // Place each number in its correct position
+        for (int i = 0; i < n - 1; i++) {
+
+            if (arr[i] == sorted[i]) {
+                continue;
+            }
+
+            int j = i + 1;
+
+            while (arr[j] != sorted[i]) {
+                j++;
+            }
+
+            if (j - i >= 2) {
+                // Non-adjacent swap is allowed
+                swap(arr, i, j);
+            } else {
+                // Adjacent positions: use a third index
+                int k = 0;
+
+                while (k < n) {
+                    if (Math.abs(k - i) >= 2 &&
+                        Math.abs(k - j) >= 2) {
+                        break;
+                    }
+                    k++;
+                }
+
+                swap(arr, i, k);
+                swap(arr, j, k);
+                swap(arr, i, k);
+            }
+        }
+
+        // Write output file
+        PrintWriter pw = new PrintWriter(
+            new FileWriter("00000000.out")
+        );
+
+        pw.println(swapCount);
+
+        // Print first indices
+        for (int i = 0; i < swapCount; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(first[i]);
+        }
+        pw.println();
+
+        // Print second indices
+        for (int i = 0; i < swapCount; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(second[i]);
+        }
+        pw.println();
+
+        pw.close();
+    }
+}
+
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class preques13 {
+    public static void main(String[] args) throws IOException {
+
+        // Read input file
+        BufferedReader br = new BufferedReader(
+            new FileReader("inp2.txt")
+        );
+
+        int n = Integer.parseInt(br.readLine().trim());
+
+        int[] numbers = new int[n];
+        String[] letters = new String[n];
+
+        int numCount = 0;
+        int letterCount = 0;
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        // Separate numbers and letters
+        for (int i = 0; i < n; i++) {
+            String item = st.nextToken();
+
+            if (item.charAt(0) >= '0' && item.charAt(0) <= '9') {
+                numbers[numCount] = Integer.parseInt(item);
+                numCount++;
+            } else {
+                letters[letterCount] = item;
+                letterCount++;
+            }
+        }
+
+        br.close();
+
+        // Bubble Sort: sort numbers in ascending order
+        for (int i = 0; i < numCount - 1; i++) {
+            for (int j = 0; j < numCount - 1 - i; j++) {
+
+                if (numbers[j] > numbers[j + 1]) {
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j + 1];
+                    numbers[j + 1] = temp;
+                }
+            }
+        }
+
+        // Write output file
+        PrintWriter pw = new PrintWriter(
+            new FileWriter("00000000.out")
+        );
+
+        // Print sorted numbers first
+        for (int i = 0; i < numCount; i++) {
+            if (i > 0) {
+                pw.print(" ");
+            }
+            pw.print(numbers[i]);
+        }
+
+        // Print letters in their original order
+        for (int i = 0; i < letterCount; i++) {
+            if (numCount > 0 || i > 0) {
+                pw.print(" ");
+            }
+            pw.print(letters[i]);
+        }
+
+        pw.println();
+        pw.close();
+    }
+}
+
 
 import java.io.*;
 public class ProblemA {
